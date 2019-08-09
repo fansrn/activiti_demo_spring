@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1565314093173" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="assigneeListener" isClosed="false" isExecutable="true" name="AssigneeListener" processType="None">
+    <startEvent id="start" name="Start"/>
+    <userTask activiti:exclusive="true" id="approval1" name="GroupApproval">
+      <extensionElements>
+        <activiti:taskListener class="com.gao.activiti.listener.TaskListenerImpl" event="create"/>
+      </extensionElements>
+    </userTask>
+    <userTask activiti:exclusive="true" id="approval2" name="TeamApproval">
+      <extensionElements>
+        <activiti:taskListener class="com.gao.activiti.listener.TaskListenerImpl" event="create"/>
+      </extensionElements>
+    </userTask>
+    <endEvent id="end" name="End"/>
+    <sequenceFlow id="_6" sourceRef="approval2" targetRef="end"/>
+    <sequenceFlow id="_7" sourceRef="approval1" targetRef="approval2"/>
+    <sequenceFlow id="_8" sourceRef="start" targetRef="approval1"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="assigneeListener">
+      <bpmndi:BPMNShape bpmnElement="start" id="Shape-start">
+        <omgdc:Bounds height="32.0" width="32.0" x="160.0" y="290.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approval1" id="Shape-approval1">
+        <omgdc:Bounds height="55.0" width="85.0" x="275.0" y="280.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approval2" id="Shape-approval2">
+        <omgdc:Bounds height="55.0" width="85.0" x="435.0" y="280.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="Shape-end">
+        <omgdc:Bounds height="32.0" width="32.0" x="600.0" y="290.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6" sourceElement="approval2" targetElement="end">
+        <omgdi:waypoint x="520.0" y="305.0"/>
+        <omgdi:waypoint x="575.0" y="305.0"/>
+        <omgdi:waypoint x="600.0312805773287" y="305.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="approval1" targetElement="approval2">
+        <omgdi:waypoint x="360.0" y="307.5"/>
+        <omgdi:waypoint x="435.0" y="307.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8" sourceElement="start" targetElement="approval1">
+        <omgdi:waypoint x="191.49193338482968" y="310.0"/>
+        <omgdi:waypoint x="235.0" y="310.0"/>
+        <omgdi:waypoint x="275.0" y="310.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

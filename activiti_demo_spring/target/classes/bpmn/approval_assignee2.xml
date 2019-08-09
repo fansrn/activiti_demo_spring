@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/testm1565252743829" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1565252743829" name="" targetNamespace="http://www.activiti.org/testm1565252743829" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="assigneeApproval" isClosed="false" isExecutable="true" name="assignee" processType="None">
+    <startEvent id="start" name="Start"/>
+    <userTask activiti:assignee="${one}" activiti:exclusive="true" id="assignee_1" name="GroupApproval"/>
+    <endEvent id="end" name="End"/>
+    <userTask activiti:assignee="${two}" activiti:exclusive="true" id="assignee_2" name="TeamApproval"/>
+    <sequenceFlow id="_8" sourceRef="assignee_1" targetRef="assignee_2"/>
+    <sequenceFlow id="_9" sourceRef="assignee_2" targetRef="end"/>
+    <sequenceFlow id="_10" sourceRef="start" targetRef="assignee_1"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="assigneeApproval">
+      <bpmndi:BPMNShape bpmnElement="start" id="Shape-start">
+        <dc:Bounds height="32.0" width="32.0" x="200.0" y="155.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="assignee_1" id="Shape-assignee_1">
+        <dc:Bounds height="55.0" width="95.0" x="280.0" y="145.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="95.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="Shape-end">
+        <dc:Bounds height="32.0" width="32.0" x="560.0" y="155.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="assignee_2" id="Shape-assignee_2">
+        <dc:Bounds height="55.0" width="95.0" x="420.0" y="145.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="95.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8" sourceElement="assignee_1" targetElement="assignee_2">
+        <di:waypoint x="375.0" y="172.5"/>
+        <di:waypoint x="420.0" y="172.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9" id="BPMNEdge__9" sourceElement="assignee_2" targetElement="end">
+        <di:waypoint x="515.0" y="175.0"/>
+        <di:waypoint x="545.0" y="175.0"/>
+        <di:waypoint x="560.5080666151704" y="175.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10" id="BPMNEdge__10" sourceElement="start" targetElement="assignee_1">
+        <di:waypoint x="231.9687194226713" y="170.0"/>
+        <di:waypoint x="255.0" y="170.0"/>
+        <di:waypoint x="280.0" y="170.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
