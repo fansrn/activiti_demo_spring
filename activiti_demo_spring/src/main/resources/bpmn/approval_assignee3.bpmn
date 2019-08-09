@@ -4,12 +4,12 @@
     <startEvent id="start" name="Start"/>
     <userTask activiti:exclusive="true" id="approval1" name="GroupApproval">
       <extensionElements>
-        <activiti:taskListener class="com.gao.activiti.listener.TaskListenerImpl" event="create"/>
+        <activiti:taskListener class="com.fansrn.activiti.listener.TaskListenerImpl" event="create"/>
       </extensionElements>
     </userTask>
     <userTask activiti:exclusive="true" id="approval2" name="TeamApproval">
       <extensionElements>
-        <activiti:taskListener class="com.gao.activiti.listener.TaskListenerImpl" event="create"/>
+        <activiti:taskListener class="com.fansrn.activiti.listener.TaskListenerImpl" event="create"/>
       </extensionElements>
     </userTask>
     <endEvent id="end" name="End"/>
