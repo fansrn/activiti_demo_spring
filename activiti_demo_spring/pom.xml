@@ -8,7 +8,6 @@
     <artifactId>acitvitiDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -62,12 +61,6 @@
             <version>1.7.22</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.activiti</groupId>
-            <artifactId>activiti-engine</artifactId>
-            <version>5.22.0</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -117,6 +110,12 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${springframework.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.2.5.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
 
         <!--spring和activiti整合-->
         <dependency>
@@ -125,10 +124,9 @@
             <version>5.22.0</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>4.2.5.RELEASE</version>
-            <scope>test</scope>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>5.22.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
