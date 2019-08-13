@@ -46,16 +46,20 @@ public class ActivitiUtils {
     /**
      * 获取核心 Service
      */
-    private static RepositoryService getRepositoryService() {
+    public static RepositoryService getRepositoryService() {
         return getProcessEngine().getRepositoryService();
     }
 
-    private static RuntimeService getRuntimeService() {
+    public static RuntimeService getRuntimeService() {
         return getProcessEngine().getRuntimeService();
     }
 
-    private static TaskService getTaskService() {
+    public static TaskService getTaskService() {
         return getProcessEngine().getTaskService();
+    }
+
+    public static HistoryService getHistoryService() {
+        return getProcessEngine().getHistoryService();
     }
 
     /*
@@ -63,9 +67,7 @@ public class ActivitiUtils {
         return getProcessEngine().getFormService();
       }
 
-      public static HistoryService getHistoryService() {
-        return getProcessEngine().getHistoryService();
-      }
+
 
       public static IdentityService getIdentityService() {
         return getProcessEngine().getIdentityService();

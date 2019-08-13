@@ -82,7 +82,7 @@ public class ApprovalTest {
      */
     @Test
     public void findProcessDefinition() {
-        List<ProcessDefinition> list = ActivitiUtils.getProcessEngine().getRepositoryService()//与流程定义和部署对象相关的Service
+        List<ProcessDefinition> list = ActivitiUtils.getRepositoryService()//与流程定义和部署对象相关的Service
                 .createProcessDefinitionQuery()//创建一个流程定义的查询
                 /* 指定查询条件,where条件 */
 //                .deploymentId(deploymentId)//使用部署对象ID查询
@@ -148,7 +148,7 @@ public class ApprovalTest {
     public void viewPic() throws IOException {
         String deploymentId = "1";
         //获取图片资源名称
-        List<String> list = ActivitiUtils.getProcessEngine().getRepositoryService().getDeploymentResourceNames(deploymentId);
+        List<String> list = ActivitiUtils.getRepositoryService().getDeploymentResourceNames(deploymentId);
         //定义图片资源的名称
         String resourceName = "";
         if (CollectionUtil.isNotEmpty(list)) {
@@ -159,7 +159,7 @@ public class ApprovalTest {
             }
         }
         //获取图片的输入流
-        InputStream in = ActivitiUtils.getProcessEngine().getRepositoryService().getResourceAsStream(deploymentId, resourceName);
+        InputStream in = ActivitiUtils.getRepositoryService().getResourceAsStream(deploymentId, resourceName);
 
         //将图片生成到桌面
         File file = new File("C:/Users/Gentleman/Desktop/" + resourceName);
@@ -294,7 +294,7 @@ public class ApprovalTest {
     @Test
     public void findHistoryActivity() {
         String processInstanceId = "17501";
-        List<HistoricActivityInstance> list = ActivitiUtils.getProcessEngine().getHistoryService()
+        List<HistoricActivityInstance> list = ActivitiUtils.getHistoryService()
                 .createHistoricActivityInstanceQuery()
                 .processInstanceId(processInstanceId)
                 .list();
@@ -318,7 +318,7 @@ public class ApprovalTest {
     public void findHistoryProcessInstance() {
         String processInstanceId = "17501";
         // 与历史数据（历史表）相关的Service
-        HistoricProcessInstance hpi = ActivitiUtils.getProcessEngine().getHistoryService()
+        HistoricProcessInstance hpi = ActivitiUtils.getHistoryService()
                 // 创建历史流程实例查询
                 .createHistoricProcessInstanceQuery()
                 // 使用流程实例ID查询
@@ -341,7 +341,7 @@ public class ApprovalTest {
     public void findHistoryTask() {
         String processInstanceId = "17501";
         // 与历史数据（历史表）相关的Service
-        List<HistoricTaskInstance> list = ActivitiUtils.getProcessEngine().getHistoryService()
+        List<HistoricTaskInstance> list = ActivitiUtils.getHistoryService()
                 // 创建历史任务实例查询
                 .createHistoricTaskInstanceQuery()
                 .processInstanceId(processInstanceId)
@@ -368,7 +368,7 @@ public class ApprovalTest {
     @Test
     public void findHistoryProcessVariables() {
         String processInstanceId = "17501";
-        List<HistoricVariableInstance> list = ActivitiUtils.getProcessEngine().getHistoryService()
+        List<HistoricVariableInstance> list = ActivitiUtils.getHistoryService()
                 // 创建一个历史的流程变量查询对象
                 .createHistoricVariableInstanceQuery()
                 .processInstanceId(processInstanceId)
@@ -394,7 +394,7 @@ public class ApprovalTest {
      */
     @Test
     public void findHistoryByNative() {
-        HistoricProcessInstance hpi = ActivitiUtils.getProcessEngine().getHistoryService()
+        HistoricProcessInstance hpi = ActivitiUtils.getHistoryService()
                 .createNativeHistoricProcessInstanceQuery()
                 .sql("select * from act_hi_procinst")
                 .singleResult();
