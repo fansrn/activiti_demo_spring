@@ -35,9 +35,9 @@ import java.util.Objects;
 @Slf4j
 public class ApprovalTest {
 
-    static final String PROCESS_KEY = "approval";
-    static final String GROUP_LEADER = "GroupLeader";
-    static final String TEAM_LEADER = "TeamLeader";
+    private static final String PROCESS_KEY = "approval";
+    private static final String GROUP_LEADER = "GroupLeader";
+    private static final String TEAM_LEADER = "TeamLeader";
 
     @Test
     public void init() {
