@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
-import java.util.zip.ZipInputStream;
 
 /**
  * description
@@ -68,9 +67,7 @@ public class ApprovalTest {
      */
     @Test
     public void deployFromZip() {
-        InputStream ins = this.getClass().getClassLoader().getResourceAsStream(ActivitiUtils.PATH + "approval" + ActivitiUtils.FIX_ZIP);
-        ZipInputStream zipInputStream = new ZipInputStream(ins);
-        Deployment deployment = ActivitiUtils.deployFromZip("流程定义zip", zipInputStream);
+        Deployment deployment = ActivitiUtils.deployFromZip("流程定义zip", "approval");
         if (null != deployment) {
             log.info("部署ID: {}", deployment.getId());
             log.info("部署名称: {}", deployment.getName());

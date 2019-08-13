@@ -1,6 +1,7 @@
 package com.fansrn.activiti.common;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ClassLoaderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
@@ -8,6 +9,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,14 +152,16 @@ public class ActivitiUtils {
     /**
      * description 通过zip文件部署
      *
-     * @param name           name of workflow
-     * @param zipInputStream zipInputStream
+     * @param name     name of workflow
+     * @param fileName name of file
      * @return Deployment
      * @author fansrn
      * @date 14:03 2019/8/7
      */
-    public static Deployment deployFromZip(String name, ZipInputStream zipInputStream) {
+    public static Deployment deployFromZip(String name, String fileName) {
         try {
+            InputStream ins = ClassLoaderUtil.getClassLoader().getResourceAsStream(PATH + fileName + FIX_ZIP);
+            ZipInputStream zipInputStream = new ZipInputStream(ins);
             return getRepositoryService()
                     .createDeployment()
                     .name(name)
