@@ -2,9 +2,7 @@ package com.fansrn.activiti.common;
 
 import cn.hutool.core.collection.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngineConfiguration;
-import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -39,6 +37,37 @@ public class ActivitiUtils {
 
     public static ProcessEngine getProcessEngine() {
         return ProcessEngines.getDefaultProcessEngine();
+    }
+
+    /**
+     * 获取核心 Service
+     */
+    public static FormService getFormService() {
+        return getProcessEngine().getFormService();
+    }
+
+    public static HistoryService getHistoryService() {
+        return getProcessEngine().getHistoryService();
+    }
+
+    public static IdentityService getIdentityService() {
+        return getProcessEngine().getIdentityService();
+    }
+
+    public static ManagementService getManagementService() {
+        return getProcessEngine().getManagementService();
+    }
+
+    public static RepositoryService getRepositoryService() {
+        return getProcessEngine().getRepositoryService();
+    }
+
+    public static RuntimeService getRuntimeService() {
+        return getProcessEngine().getRuntimeService();
+    }
+
+    public static TaskService getTaskService() {
+        return getProcessEngine().getTaskService();
     }
 
     /**
@@ -95,9 +124,8 @@ public class ActivitiUtils {
      */
     public static Deployment deployFromClasspath(String flowName, String fileName) {
         try {
-            Deployment deployment = getProcessEngine()
-                    //RepositoryService：与流程定义和部署对象相关的Service
-                    .getRepositoryService()
+            //RepositoryService：与流程定义和部署对象相关的Service
+            Deployment deployment = getRepositoryService()
                     //创建一个部署对象
                     .createDeployment()
                     //添加部署的名称
@@ -126,7 +154,7 @@ public class ActivitiUtils {
      */
     public static Deployment deployFromZip(String name, ZipInputStream zipInputStream) {
         try {
-            Deployment deployment = getProcessEngine().getRepositoryService()
+            Deployment deployment = getRepositoryService()
                     .createDeployment()
                     .name(name)
                     //指定zip格式的文件完成部署
@@ -148,8 +176,7 @@ public class ActivitiUtils {
      * @date 11:20 2019/8/8
      */
     public static ProcessDefinition findLastestProcess(String processDefinitionKey) {
-        List<ProcessDefinition> processDefinitions = ActivitiUtils.getProcessEngine()
-                .getRepositoryService()
+        List<ProcessDefinition> processDefinitions = getRepositoryService()
                 // 流程定义查询
                 .createProcessDefinitionQuery()
                 // 查询条件
@@ -191,7 +218,7 @@ public class ActivitiUtils {
      * @date 13:59 2019/8/7
      */
     private static void delCascade(String deploymentId, boolean cascade) {
-        ActivitiUtils.getProcessEngine().getRepositoryService().deleteDeployment(deploymentId, cascade);
+        getRepositoryService().deleteDeployment(deploymentId, cascade);
     }
 
     /**
@@ -218,7 +245,7 @@ public class ActivitiUtils {
      */
     public static ProcessInstance startProcess(String processDefinitionKey, Map<String, Object> variables) {
         try {
-            ProcessInstance pi = getProcessEngine().getRuntimeService()
+            ProcessInstance pi = getRuntimeService()
                     /*
                      * 流程可通过以下几种方式启动，我们使用key来启动，使用key值启动，默认是按照最新版本的流程定义启动
                      * .startProcessInstanceById
@@ -245,7 +272,7 @@ public class ActivitiUtils {
      * @date 14:49 2019/8/8
      */
     public static Task findTask(String processInstanceId, String assignee) {
-        return getProcessEngine().getTaskService()
+        return getTaskService()
                 .createTaskQuery()
                 .processInstanceId(processInstanceId)
                 .taskAssignee(assignee)
@@ -263,8 +290,7 @@ public class ActivitiUtils {
     public static List<Task> findTasks(String assignee) {
         try {
             //与正在执行的任务管理相关的Service
-            List<Task> list = getProcessEngine()
-                    .getTaskService()
+            List<Task> list = getTaskService()
                     //创建任务查询对象
                     .createTaskQuery()
                     /* 查询条件（where部分）*/
@@ -310,8 +336,7 @@ public class ActivitiUtils {
      */
     public static boolean completeTaskById(String taskId, Map<String, Object> variables) {
         try {
-            getProcessEngine().getTaskService()//与正在执行的任务管理相关的Service
-                    .complete(taskId, variables);
+            getTaskService().complete(taskId, variables);
             return true;
         } catch (Exception e) {
             log.error("ActivitiUtils: complete task error", e);
@@ -322,16 +347,15 @@ public class ActivitiUtils {
     /**
      * description 完成任务
      *
-     * @param task 流程实例id
-     * @param variables         额外参数
+     * @param task      流程实例id
+     * @param variables 额外参数
      * @return
      * @author fansrn
      * @date 14:58 2019/8/8
      */
     public static boolean completeTaskByAssignee(Task task, Map<String, Object> variables) {
         try {
-            getProcessEngine().getTaskService()
-                    .complete(task.getId(), variables);
+            getTaskService().complete(task.getId(), variables);
             return true;
         } catch (Exception e) {
             log.error("ActivitiUtils: complete task by assignee error", e);
@@ -349,9 +373,7 @@ public class ActivitiUtils {
      */
     public static String isProcessActive(String processInstanceId) {
         //表示正在执行的流程实例和执行对象
-        ProcessInstance pi = getProcessEngine()
-                //获取相关service
-                .getRuntimeService()
+        ProcessInstance pi = getRuntimeService()
                 //创建流程实例查询
                 .createProcessInstanceQuery()
                 //使用流程实例ID查询
