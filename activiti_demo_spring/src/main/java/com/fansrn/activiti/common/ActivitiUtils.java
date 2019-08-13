@@ -34,10 +34,10 @@ public class ActivitiUtils {
      * private static final String JDBC_PASSWORD = "123456";
      */
 
-    public static final String PATH = "bpmn/";
+    private static final String PATH = "bpmn/";
     private static final String FIX_BPMN = ".bpmn";
     private static final String FIX_PNG = ".png";
-    public static final String FIX_ZIP = ".zip";
+    private static final String FIX_ZIP = ".zip";
 
     public static ProcessEngine getProcessEngine() {
         return ProcessEngines.getDefaultProcessEngine();
@@ -161,7 +161,10 @@ public class ActivitiUtils {
     public static Deployment deployFromZip(String name, String fileName) {
         try {
             InputStream ins = ClassLoaderUtil.getClassLoader().getResourceAsStream(PATH + fileName + FIX_ZIP);
-            ZipInputStream zipInputStream = new ZipInputStream(ins);
+            ZipInputStream zipInputStream = null;
+            if (ins != null) {
+                zipInputStream = new ZipInputStream(ins);
+            }
             return getRepositoryService()
                     .createDeployment()
                     .name(name)
