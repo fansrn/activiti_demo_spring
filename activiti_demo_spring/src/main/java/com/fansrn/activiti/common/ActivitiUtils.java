@@ -161,16 +161,16 @@ public class ActivitiUtils {
     public static Deployment deployFromZip(String name, String fileName) {
         try {
             InputStream ins = ClassLoaderUtil.getClassLoader().getResourceAsStream(PATH + fileName + FIX_ZIP);
-            ZipInputStream zipInputStream = null;
             if (ins != null) {
-                zipInputStream = new ZipInputStream(ins);
+                ZipInputStream zipInputStream = new ZipInputStream(ins);
+                return getRepositoryService()
+                        .createDeployment()
+                        .name(name)
+                        //指定zip格式的文件完成部署
+                        .addZipInputStream(zipInputStream)
+                        .deploy();
             }
-            return getRepositoryService()
-                    .createDeployment()
-                    .name(name)
-                    //指定zip格式的文件完成部署
-                    .addZipInputStream(zipInputStream)
-                    .deploy();
+            return null;
         } catch (Exception e) {
             log.error("ActivitiUtils: deploy from zip error", e);
         }
